@@ -20,7 +20,7 @@ export const signup = async (req, res) => {
       //throw new Error("User with this email already exists");
       return res.status(400).json({
         success: false,
-        message: "User with this email already exists",
+        message: "User with this email already existed",
       });
     }
 
@@ -78,7 +78,7 @@ export const verifyEmail = async (req, res) => {
     await sendWelcomeEmail(user.email, user.name);
     res.status(200).json({
       success: true,
-      message: "Email verified successfully",
+      message: "Email verification completed successfully",
       user: {
         ...user._doc,
         password: undefined,
@@ -93,7 +93,7 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
   try {
     if (!email || !password) {
-      throw new Error("All Fields are required");
+      throw new Error("All Fields are required to continue login process");
     }
     const user = await User.findOne({ email });
     if (!user) {
